@@ -1,9 +1,14 @@
 package com.alura.literalura.principal;
 
+import ch.qos.logback.classic.pattern.CallerDataConverter;
+
 import java.lang.classfile.instruction.SwitchCase;
 import java.util.Scanner;
 
 public class Principal {
+    private static final String = "https://gutendex.com/books/";
+    private APIConsumer consumer = new APIConsumer();
+    private DataConverter converter = new DataConverter();
     private Scanner teclado = new Scanner(System.in);
 
     public void muestraMenu(){
