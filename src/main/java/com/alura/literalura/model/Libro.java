@@ -65,6 +65,10 @@ public class Libro {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
+        // Si el autor no tiene este libro en su lista, lo agregamos
+        if (autor != null && !autor.getLibros().contains(this)) {
+            autor.getLibros().add(this);
+        }
     }
 
     @Override

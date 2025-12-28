@@ -116,7 +116,13 @@ public class Principal {
     }
 
     private void buscarAutoresRegistrados() {
-        // Lógica para el paso 3
+        List<Autor> autores = repositorioAutor.findAll();
+
+        if (autores.isEmpty()){
+            System.out.println("No existen autores registrados");
+        } else {
+            autores.forEach(System.out::println);
+        }
     }
 
     private void buscarAutoresVivosPorAno() {
