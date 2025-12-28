@@ -74,7 +74,7 @@ public class Principal {
         if (datos != null) {
             var datosAutor = datos.autores().get(0);
             Autor autor = new Autor(datosAutor);
-            Libro libro = new Libro(datos, autor);            
+            Libro libro = new Libro(datos, autor);
             repositorioLibro.save(libro);
             System.out.println(libro);
         } else {
