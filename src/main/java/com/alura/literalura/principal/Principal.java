@@ -126,7 +126,22 @@ public class Principal {
     }
 
     private void buscarAutoresVivosPorAno() {
-        // Lógica para el paso 4
+        System.out.println("Ingresa el año que deseas consultar: ");
+        try{
+            var ano = teclado.nextInt();
+            teclado.nextLine();
+
+            List<Autor> autoresVivos = repositorioAutor.findByFechaDeNacimientoLessThanEqualAndFechaDeFallecimientoGreaterThanEqual(ano, ano);
+
+            if (autoresVivos.isEmpty()){
+                System.out.println("No se encontraron autores vivos en el año: " + ano);
+            } else {
+                autoresVivos.forEach(System.out::println);
+            }
+        } catch (Exception e){
+            System.out.println("Año no valido");
+            teclado.nextLine();
+        }
     }
 
     private void buscarLibroPorIdioma() {
