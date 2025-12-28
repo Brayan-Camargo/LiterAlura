@@ -72,11 +72,22 @@ public class Principal {
         LibroDTO datos = getDatosLibro();
 
         if (datos != null) {
+            // 1. Obtenemos el primer autor del DTO
             var datosAutor = datos.autores().get(0);
+
+            // 2. Creamos la entidad Autor
             Autor autor = new Autor(datosAutor);
-            Libro libro = new Libro(datos, autor);
-            repositorioLibro.save(libro);
-            System.out.println(libro);
+
+            // 3. Creamos la entidad Libro y le ASIGNAMOS el autor
+            Libro libro = new Libro(datos);
+            libro.setAutor(autor); // ¡Esta línea es la que te faltaba para conectar ambos!
+
+            try {
+                repositorioLibro.save(libro);
+                System.out.println(libro); // Esto usará el toString que creamos antes
+            } catch (Exception e) {
+                System.out.println("Error al guardar: El libro ya existe o hay un problema con los datos.");
+            }
         } else {
             System.out.println("Libro no encontrado.");
         }

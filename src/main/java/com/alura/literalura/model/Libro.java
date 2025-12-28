@@ -14,17 +14,16 @@ public class Libro {
     private Idioma idioma;
     private Integer numeroDeDescargas;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Autor autor;
 
     public Libro() {}
 
-    public Libro(LibroDTO datosLibro, Autor autor){
+    public Libro(LibroDTO datosLibro){
         this.id = datosLibro.id();
         this.titulo = datosLibro.titulo();
         this.idioma = Idioma.fromString(datosLibro.idiomas().get(0));
         this.numeroDeDescargas = datosLibro.numeroDescargas();
-        this.autor = autor;
     }
 
     public Long getId() {
