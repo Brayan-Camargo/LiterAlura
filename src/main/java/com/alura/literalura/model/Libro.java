@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class Libro {
     @Id
     private Long id;
+    @Column(length = 1000)
     private String titulo;
 
     @Enumerated(EnumType.STRING)

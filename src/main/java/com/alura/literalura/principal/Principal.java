@@ -8,6 +8,8 @@ import com.alura.literalura.repository.AutorRepository;
 import com.alura.literalura.repository.LibroRepository;
 import com.alura.literalura.service.ConsumoAPI;
 import com.alura.literalura.service.DataConverter;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
@@ -72,19 +74,16 @@ public class Principal {
         LibroDTO datos = getDatosLibro();
 
         if (datos != null) {
-            // 1. Obtenemos el primer autor del DTO
             var datosAutor = datos.autores().get(0);
 
-            // 2. Creamos la entidad Autor
             Autor autor = new Autor(datosAutor);
 
-            // 3. Creamos la entidad Libro y le ASIGNAMOS el autor
             Libro libro = new Libro(datos);
-            libro.setAutor(autor); // ¡Esta línea es la que te faltaba para conectar ambos!
+            libro.setAutor(autor);
 
             try {
                 repositorioLibro.save(libro);
-                System.out.println(libro); // Esto usará el toString que creamos antes
+                System.out.println(libro);
             } catch (Exception e) {
                 System.out.println("Error al guardar: El libro ya existe o hay un problema con los datos.");
             }
@@ -93,13 +92,11 @@ public class Principal {
         }
     }
 
-    // Este metodo ayuda a buscar en la API
     private LibroDTO getDatosLibro() {
         System.out.println("Ingrese el nombre del libro que desea buscar:");
         var nombreLibro = teclado.nextLine();
         var json = consumer.obtenerDatos(URL_BASE + "?search=" + nombreLibro.replace(" ", "+"));
 
-        // Gutendex devuelve una lista llamada "results". Necesitamos este DTO para leerla.
         var datosBusqueda = converter.getData(json, RespuestaLibrosDTO.class);
 
         if (datosBusqueda != null && datosBusqueda.resultados() != null && !datosBusqueda.resultados().isEmpty()) {
@@ -109,7 +106,13 @@ public class Principal {
     }
 
     private void buscarLibrosRegistrados() {
-        // Lógica para el paso 2
+        List<Libro> libros = repositorioLibro.findAll();
+
+        if (libros.isEmpty()){
+            System.out.println("No se encontraron libros registrados. :(");
+        } else {
+            libros.forEach(System.out::println);
+        }
     }
 
     private void buscarAutoresRegistrados() {
