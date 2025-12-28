@@ -1,7 +1,7 @@
 package com.alura.literalura.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DataConverter implements IDataConverter{
 

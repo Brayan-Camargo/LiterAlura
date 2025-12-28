@@ -19,11 +19,12 @@ public class Libro {
 
     public Libro() {}
 
-    public Libro(LibroDTO datosLibro){
+    public Libro(LibroDTO datosLibro, Autor autor){
         this.id = datosLibro.id();
         this.titulo = datosLibro.titulo();
         this.idioma = Idioma.fromString(datosLibro.idiomas().get(0));
         this.numeroDeDescargas = datosLibro.numeroDescargas();
+        this.autor = autor;
     }
 
     public Long getId() {
@@ -64,5 +65,15 @@ public class Libro {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
+    }
+
+    @Override
+    public String toString() {
+        return "---------------- LIBRO ----------------" + "\n" +
+                "Título: " + titulo + "\n" +
+                "Autor: " + (autor != null ? autor.getNombre() : "Desconocido") + "\n" +
+                "Idioma: " + idioma + "\n" +
+                "Número de descargas: " + numeroDeDescargas + "\n" +
+                "---------------------------------------" + "\n";
     }
 }
