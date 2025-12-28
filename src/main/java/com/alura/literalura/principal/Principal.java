@@ -3,6 +3,7 @@ package com.alura.literalura.principal;
 import com.alura.literalura.dto.LibroDTO;
 import com.alura.literalura.dto.RespuestaLibrosDTO;
 import com.alura.literalura.model.Autor;
+import com.alura.literalura.model.Idioma;
 import com.alura.literalura.model.Libro;
 import com.alura.literalura.repository.AutorRepository;
 import com.alura.literalura.repository.LibroRepository;
@@ -145,6 +146,28 @@ public class Principal {
     }
 
     private void buscarLibroPorIdioma() {
-        // Lógica para el paso 5
+        System.out.println("""
+            Ingrese el idioma para buscar los libros:
+            es - Español
+            en - Inglés
+            fr - Francés
+            pt - Portugués
+            """);
+        var nombreIdioma = teclado.nextLine();
+
+        // Convertimos el String del usuario al Enum Idioma
+        try {
+            Idioma idioma = Idioma.fromString(nombreIdioma);
+            List<Libro> librosPorIdioma = repositorioLibro.findByIdioma(idioma);
+
+            if (librosPorIdioma.isEmpty()) {
+                System.out.println("No hay libros registrados en ese idioma.");
+            } else {
+                System.out.println("--- LIBROS EN EL IDIOMA " + idioma + " ---");
+                librosPorIdioma.forEach(System.out::println);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Idioma no válido o no reconocido.");
+        }
     }
 }
