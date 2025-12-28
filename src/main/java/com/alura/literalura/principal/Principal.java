@@ -1,13 +1,15 @@
 package com.alura.literalura.principal;
 
 import ch.qos.logback.classic.pattern.CallerDataConverter;
+import com.alura.literalura.service.ConsumoAPI;
+import com.alura.literalura.service.DataConverter;
 
 import java.lang.classfile.instruction.SwitchCase;
 import java.util.Scanner;
 
 public class Principal {
-    private static final String = "https://gutendex.com/books/";
-    private APIConsumer consumer = new APIConsumer();
+    private static final String URL_BASE = "https://gutendex.com/books/";
+    private ConsumoAPI consumer = new ConsumoAPI();
     private DataConverter converter = new DataConverter();
     private Scanner teclado = new Scanner(System.in);
 
